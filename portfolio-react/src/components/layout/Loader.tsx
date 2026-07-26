@@ -9,53 +9,59 @@ export default function Loader() {
   const loaderRef = useRef<HTMLDivElement>(null);
   const countRef = useRef<HTMLDivElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
-  const [hidden, setHidden] = useState(false);
+  const [hidden, setHidden] = useState(intro.hasPlayed);
 
   useEffect(() => {
-    if (prefersReducedMotion() || intro.hasPlayed) {
-      intro.start();
+    if (intro.hasPlayed || prefersReducedMotion()) {
       setHidden(true);
+      if (!intro.hasPlayed) intro.start();
       return;
     }
 
     const el = loaderRef.current;
     if (!el) return;
 
+    document.body.style.overflow = 'hidden';
     ScrollSmoother.get()?.paused(true);
 
-    const countObj = { val: 0 };
+    const proxy = { progress: 0 };
+
     const tl = gsap.timeline({
       onComplete: () => {
+        document.body.style.overflow = '';
         ScrollSmoother.get()?.paused(false);
-        ScrollTrigger.refresh();
         setHidden(true);
+        requestAnimationFrame(() => {
+          ScrollSmoother.get()?.refresh();
+          ScrollTrigger.refresh();
+        });
       },
     });
 
-    tl.to(countObj, {
-      val: 100,
+    tl.to(proxy, {
+      progress: 100,
       duration: 1.7,
       ease: 'power2.inOut',
-      onUpdate() {
-        const v = Math.round(countObj.val);
+      onUpdate: () => {
+        const v = Math.round(proxy.progress);
         if (countRef.current) countRef.current.textContent = String(v).padStart(2, '0');
         if (barRef.current) barRef.current.style.width = v + '%';
       },
     }, 0);
+
+    tl.call(() => intro.start(), null, 0.544);
 
     tl.to(el, {
       clipPath: 'inset(0 0 100% 0)',
       yPercent: -6,
       duration: 1.05,
       ease: 'power3.inOut',
-    }, 1.1);
-
-    tl.call(() => intro.start(), [], 1.44);
-
-    tl.call(() => ScrollTrigger.refresh(), [], '>-0.05');
+    }, '+=0.2');
 
     return () => {
       tl.kill();
+      document.body.style.overflow = '';
+      ScrollSmoother.get()?.paused(false);
     };
   }, []);
 

@@ -33,8 +33,10 @@ export default function App() {
       ScrollSmoother.create({
         wrapper: '#smooth-wrapper',
         content: '#smooth-content',
-        smooth: 1.5,
+        smooth: 1.2,
         effects: true,
+        normalizeScroll: true,
+        ignoreMobileResize: true,
       });
     });
     return () => ctx.revert();
@@ -42,13 +44,11 @@ export default function App() {
 
   const openModal = (id: string) => {
     setOpenId(id);
-    document.body.style.overflow = 'hidden';
     ScrollSmoother.get()?.paused(true);
   };
 
   const closeModal = () => {
     setOpenId(null);
-    document.body.style.overflow = '';
     ScrollSmoother.get()?.paused(false);
     ScrollTrigger.refresh();
   };

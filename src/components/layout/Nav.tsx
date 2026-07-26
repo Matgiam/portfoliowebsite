@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollSmoother } from 'gsap/all';
+import { intro } from '../../lib/intro';
 
 gsap.registerPlugin(ScrollSmoother);
 
@@ -14,18 +15,19 @@ export default function Nav({ showNav = true }: Props) {
 
   useEffect(() => {
     if (!showNav) return;
-    const ctx = gsap.context(() => {
-      gsap.from(navRef.current!.children, {
-        opacity: 0,
-        y: -14,
-        duration: 0.9,
-        stagger: 0.06,
-        ease: 'expo.out',
-        delay: 0.35,
+    let ctx: gsap.Context | null = null;
+    const off = intro.onStart(() => {
+      ctx = gsap.context(() => {
+        gsap.from(navRef.current!.children, {
+          opacity: 0,
+          y: -14,
+          duration: 0.9,
+          stagger: 0.06,
+          ease: 'expo.out',
+        });
       });
     });
-
-    return () => ctx.revert();
+    return () => { off(); ctx?.revert(); };
   }, [showNav]);
 
   useEffect(() => {

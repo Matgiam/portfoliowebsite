@@ -41,7 +41,7 @@ export default function About() {
           {[
             { label: 'Studying', value: 'Multimedia & Creative Technology' },
             { label: 'Based in', value: 'Brussels, Belgium' },
-            { label: 'Looking for', value: 'A junior front-end role', accent: true },
+            { label: 'Looking for', value: 'Front-end role', accent: true },
           ].map((row, i, arr) => (
             <div
               key={row.label}

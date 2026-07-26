@@ -1,10 +1,15 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollSmoother } from 'gsap/all';
 import { intro, prefersReducedMotion } from '../../lib/intro';
 
-const LINE1 = 'MATTEO';
-const LINE2 = 'GIAMBARRESI';
+function splitToSpans(text: string) {
+  return text.split('').map((char, i) => (
+    <span key={i} style={{ display: 'inline-block' }}>
+      {char === ' ' ? '\u00A0' : char}
+    </span>
+  ));
+}
 
 export default function Hero() {
   const glowRef = useRef<HTMLDivElement>(null);
@@ -12,53 +17,63 @@ export default function Hero() {
   const line2Ref = useRef<HTMLDivElement>(null);
   const metaRef = useRef<HTMLDivElement>(null);
 
+  const done = intro.hasPlayed || prefersReducedMotion();
+
   useLayoutEffect(() => {
-    if (prefersReducedMotion()) return;
-
-    const letters1 = line1Ref.current
-      ? Array.from(line1Ref.current.querySelectorAll<HTMLElement>('[data-letter]'))
-      : [];
-    const letters2 = line2Ref.current
-      ? Array.from(line2Ref.current.querySelectorAll<HTMLElement>('[data-letter]'))
-      : [];
-
-    gsap.set(glowRef.current, { opacity: 0, scale: 0.72 });
-    gsap.set([...letters1, ...letters2], { yPercent: 108, opacity: 0 });
+    if (done) return;
+    const l1 = line1Ref.current?.querySelectorAll('span');
+    const l2 = line2Ref.current?.querySelectorAll('span');
+    if (l1) gsap.set(l1, { yPercent: 108 });
+    if (l2) gsap.set(l2, { yPercent: 108 });
     if (metaRef.current) gsap.set(metaRef.current.children, { opacity: 0, y: 22 });
+    if (glowRef.current) gsap.set(glowRef.current, { opacity: 0, scale: 0.72 });
+  }, [done]);
 
+  useEffect(() => {
+    if (done) return;
+
+    let ctx: gsap.Context | null = null;
     const off = intro.onStart(() => {
-      const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
+      ctx = gsap.context(() => {
+        const l1 = line1Ref.current?.querySelectorAll('span');
+        const l2 = line2Ref.current?.querySelectorAll('span');
 
-      tl.to(glowRef.current, { opacity: 1, scale: 1, duration: 1.8 }, 0);
-
-      tl.to(letters1, {
-        yPercent: 0,
-        opacity: 1,
-        duration: 1.35,
-        stagger: 0.045,
-      }, 0);
-
-      tl.to(letters2, {
-        yPercent: 0,
-        opacity: 1,
-        duration: 1.35,
-        stagger: 0.045,
-      }, 0.22);
-
-      if (metaRef.current) {
-        tl.to(metaRef.current.children, {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          stagger: 0.1,
-        }, 0.65);
-      }
+        if (l1) {
+          gsap.to(l1, {
+            yPercent: 0,
+            duration: 1.35,
+            stagger: 0.045,
+            ease: 'expo.out',
+          });
+        }
+        if (l2) {
+          gsap.to(l2, {
+            yPercent: 0,
+            duration: 1.35,
+            stagger: 0.045,
+            ease: 'expo.out',
+          }, 0.22);
+        }
+        if (glowRef.current) {
+          gsap.to(glowRef.current, { opacity: 1, scale: 1, duration: 1.8, ease: 'expo.out' }, 0);
+        }
+        if (metaRef.current) {
+          gsap.to(metaRef.current.children, {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            stagger: 0.1,
+            ease: 'expo.out',
+          }, 0.65);
+        }
+      });
     });
 
     return () => {
       off();
+      ctx?.revert();
     };
-  }, []);
+  }, [done]);
 
   return (
     <section
@@ -106,9 +121,7 @@ export default function Hero() {
               color: 'var(--color-text)',
             }}
           >
-            {LINE1.split('').map((ch, i) => (
-              <span key={i} data-letter style={{ display: 'inline-block' }}>{ch}</span>
-            ))}
+            {splitToSpans('MATTEO')}
           </h1>
         </div>
         <div style={{ position: 'relative', zIndex: 3, overflow: 'hidden', marginTop: '-0.8vw', paddingBottom: '0.08em' }}>
@@ -125,9 +138,7 @@ export default function Hero() {
               color: 'var(--color-accent)',
             }}
           >
-            {LINE2.split('').map((ch, i) => (
-              <span key={i} data-letter style={{ display: 'inline-block' }}>{ch}</span>
-            ))}
+            {splitToSpans('GIAMBARRESI')}
           </div>
         </div>
       </div>
