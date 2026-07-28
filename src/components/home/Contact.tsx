@@ -67,7 +67,7 @@ export default function Contact() {
       <div className="contact-grid" style={{ position: 'relative', display: 'grid', gridTemplateColumns: 'minmax(0,1fr) minmax(0,0.95fr)', gap: 'clamp(32px,5vw,90px)', alignItems: 'start' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'calc(var(--space-8) * 1.4)' }}>
           <p data-reveal style={{ margin: 0, fontSize: 'clamp(16px,1.35vw,20px)', lineHeight: 1.6, maxWidth: '38ch', color: 'color-mix(in srgb, var(--color-text) 78%, transparent)' }}>
-            Hiring a junior front-end developer, or need a second pair of hands on a build? Write me, I answer fast.
+            Hiring a front-end developer, or need a second pair of hands on a build? Write me, I answer fast.
           </p>
           <a data-reveal data-magnetic href="mailto:matteo.giambarrresi.contactpro@gmail.com" style={{ display: 'inline-block', fontFamily: 'var(--font-heading)', fontWeight: 500, fontSize: 'clamp(17px,1.9vw,30px)', letterSpacing: '-0.02em', color: 'var(--color-text)', paddingBottom: 8, background: 'linear-gradient(to right, var(--color-accent), var(--color-accent)) no-repeat bottom / 100% 1px', wordBreak: 'break-word' }}>
             matteo.giambarrresi.contactpro@gmail.com

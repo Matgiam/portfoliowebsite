@@ -28,7 +28,7 @@ export default function About() {
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)', maxWidth: '46ch' }}>
           <p data-reveal style={{ margin: 0, fontSize: 'clamp(16px,1.35vw,20px)', lineHeight: 1.6, color: 'var(--color-text)' }}>
-            Twenty-one, Brussels. Last year of Multimedia &amp; Creative Technology at Erasmushogeschool Brussel.
+            22, Brussels. Graduated at &amp; Creative Technology at Erasmushogeschool Brussel.
           </p>
           <p data-reveal style={{ margin: 0, fontSize: 15, lineHeight: 1.75, color: 'color-mix(in srgb, var(--color-text) 72%, transparent)' }}>
             I started with school briefs and kept going after the deadlines: rebuilding the same page three times until the motion felt right. That&apos;s the part I chase: a build that responds the instant you touch it.
