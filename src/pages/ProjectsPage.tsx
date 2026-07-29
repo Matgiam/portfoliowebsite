@@ -13,6 +13,9 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 const allProjects = (projectsData as Project[]).map((p, i) => decorateProject(p, i));
 
+// Fixed display order for the filter bar; a category only shows up once something uses it.
+const CATEGORIES = ['Web app', 'Showcase site', 'Client work', 'Music', 'School project'];
+
 interface Props {
   onOpen: (id: string) => void;
 }
@@ -38,17 +41,12 @@ export default function ProjectsPage({ onOpen }: Props) {
     return () => ctx.revert();
   }, [filter]);
 
-  const tags = ['All'];
-  allProjects.forEach((p) =>
-    p.stack.forEach((t) => {
-      if (!tags.includes(t)) tags.push(t);
-    }),
-  );
+  const tags = ['All', ...CATEGORIES.filter((c) => allProjects.some((p) => p.categories.includes(c)))];
 
   const visible =
     filter === 'All'
       ? allProjects
-      : allProjects.filter((p) => p.stack.includes(filter));
+      : allProjects.filter((p) => p.categories.includes(filter));
 
   return (
     <div

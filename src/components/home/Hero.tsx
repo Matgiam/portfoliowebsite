@@ -151,7 +151,7 @@ export default function Hero() {
             Front-end developer
           </span>
           <span style={{ fontSize: 13, lineHeight: 1.5, maxWidth: '32ch', color: 'color-mix(in srgb, var(--color-text) 66%, transparent)' }}>
-            React, GSAP motion and interfaces that stay out of the way.
+            React, GSAP, SEO optimization, performance, accessibility, and a keen eye for design. I build fast, interactive websites that are a joy to use.
           </span>
         </div>
         <button

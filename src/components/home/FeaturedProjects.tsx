@@ -83,7 +83,7 @@ export default function FeaturedProjects({ projects, onOpen }: Props) {
       >
         {projects.map((p, i) => (
           <article
-            key={p.id}
+            key={`${p.id}-${i}`}
             data-card
             className="featured-card"
             style={{
@@ -97,8 +97,8 @@ export default function FeaturedProjects({ projects, onOpen }: Props) {
               overflow: 'hidden',
             }}
           >
-            <div style={{ position: 'relative', aspectRatio: '16/10', overflow: 'hidden', background: '#1b1d2b' }}>
-              <img data-card-img src={p.cover} alt={p.name} style={{ width: '100%', height: '112%', objectFit: 'cover', objectPosition: 'top center' }} />
+            <div style={{ position: 'relative', aspectRatio: '16/9', overflow: 'hidden', background: '#1b1d2b' }}>
+              <img src={p.cover} alt={p.name} style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center' }} />
               <span style={{ position: 'absolute', top: 'var(--space-4)', left: 'var(--space-4)', fontFamily: 'var(--font-heading)', fontWeight: 500, fontSize: 12, letterSpacing: '0.14em', color: 'var(--color-accent-300)' }}>
                 {p.index}
               </span>
@@ -142,9 +142,8 @@ export default function FeaturedProjects({ projects, onOpen }: Props) {
           .featured-card {
             width: 100% !important;
           }
-          .featured-card img[data-card-img] {
-            will-change: auto !important;
-            transform: none !important;
+          .featured-card:not(:first-child) {
+            display: none !important;
           }
           #work-strip {
             min-height: auto !important;

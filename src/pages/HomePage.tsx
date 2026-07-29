@@ -34,7 +34,7 @@ export default function HomePage({ onOpen }: Props) {
       <Hero />
       <TechMarquee />
       <WorkTitle />
-      <FeaturedProjects projects={allProjects.slice(0, 4)} onOpen={onOpen} />
+      <FeaturedProjects projects={allProjects.slice(0, 8)} onOpen={onOpen} />
       <Manifesto />
       <About />
       <AvailabilityMarquee />

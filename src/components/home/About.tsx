@@ -31,15 +31,15 @@ export default function About() {
             22, Brussels. Graduated at &amp; Creative Technology at Erasmushogeschool Brussel.
           </p>
           <p data-reveal style={{ margin: 0, fontSize: 15, lineHeight: 1.75, color: 'color-mix(in srgb, var(--color-text) 72%, transparent)' }}>
-            I started with school briefs and kept going after the deadlines: rebuilding the same page three times until the motion felt right. That&apos;s the part I chase: a build that responds the instant you touch it.
           </p>
           <p data-reveal style={{ margin: 0, fontSize: 15, lineHeight: 1.75, color: 'color-mix(in srgb, var(--color-text) 72%, transparent)' }}>
-            Piano, guitar, drums since I was small. Timing is timing, whether it&apos;s a fill or an ease curve.
+            I know when to be serious, and I am disciplined enough to assess the work I need to complete and organize it effectively, ensuring that my assignments are carried out in a clear and structured way.
+
           </p>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           {[
-            { label: 'Studying', value: 'Multimedia & Creative Technology' },
+            { label: 'Studied', value: 'Multimedia & Creative Technology' },
             { label: 'Based in', value: 'Brussels, Belgium' },
             { label: 'Looking for', value: 'Front-end role', accent: true },
           ].map((row, i, arr) => (

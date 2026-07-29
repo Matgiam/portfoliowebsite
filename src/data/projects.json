@@ -1,67 +1,110 @@
 [
-  {
-    "id": "stick-underground",
-    "name": "Stick Underground",
-    "year": "2023",
-    "role": "Design & front-end",
-    "stack": ["JavaScript", "HTML", "CSS", "MongoDB"],
-    "summary": "A finder that matches drummers with the sticks that suit how they actually play.",
-    "content": "Stick Underground is a website for drummers of all levels, built to help them find drumsticks adapted to their needs. Product data lives in MongoDB and is filtered client-side, so browsing the catalogue never reloads the page.",
-    "link": "https://ehb-mct.github.io/web2-course-project-front-end-MatteoGiambarresi/index.html",
-    "live": true,
-    "images": ["assets/projects/stick-1.png", "assets/projects/stick-2.png", "assets/projects/stick-3.png", "assets/projects/stick-4.png"]
-  },
-  {
-    "id": "make-it-brussels",
-    "name": "Make it Brussels",
-    "year": "2024",
-    "role": "Front-end, team of four",
-    "stack": ["JavaScript", "HTML", "CSS", "PocketHost"],
-    "summary": "A lending platform for the Erasmushogeschool medialab, built with a real client brief.",
-    "content": "Make it Brussels was a client project with EHB: a website for the uitleendienst of the medialab at Erasmus Kaai. Students browse available gear, check what is out on loan and reserve it. The whole flow sits on a PocketHost backend.",
-    "link": "https://ehb-mct.github.io/full-projects-2-2023-2024-lab1-mct",
-    "live": true,
-    "images": [
-      "https://res.cloudinary.com/dtpbxvstn/image/upload/v1757872758/makeitbrussels_image_1_hucdhk.png",
-      "https://res.cloudinary.com/dtpbxvstn/image/upload/v1757872759/makeitbrussels_image_2_cfgoed.png",
-      "https://res.cloudinary.com/dtpbxvstn/image/upload/v1757872759/makeitbrussels_image_3_b0dqem.png",
-      "https://res.cloudinary.com/dtpbxvstn/image/upload/v1757872758/makeitbrussels_image_4_lmzrf7.png"
-    ]
-  },
-  {
-    "id": "pokedex",
-    "name": "Pokédex",
-    "year": "2025",
-    "role": "Solo build",
-    "stack": ["React", "JavaScript", "REST API", "CSS"],
-    "summary": "A searchable Pokédex built on the public PokéAPI.",
-    "content": "A React front-end on top of the public PokéAPI: search, type filters and a detail view per Pokémon, with results cached so repeat lookups are instant.",
-    "link": "",
-    "live": false,
-    "images": ["assets/projects/pokemon-1.png", "assets/projects/pokemon-2.png", "assets/projects/pokemon-3.png", "assets/projects/pokemon-4.png"]
-  },
-  {
-    "id": "matteo-music",
-    "name": "Matteo Music",
-    "year": "2025",
-    "role": "Design & front-end",
-    "stack": ["React", "GSAP", "Web Audio API", "CSS"],
-    "summary": "A music page where the layout reacts to what is playing.",
-    "content": "A personal music page: tracks, an in-page player and GSAP transitions driven by playback state. Built to see how far interface motion can go before it gets in the way.",
-    "link": "",
-    "live": false,
-    "images": ["assets/projects/music-1.png", "assets/projects/music-2.png", "assets/projects/music-3.png", "assets/projects/music-4.png"]
-  },
-  {
-    "id": "foolish-minds",
-    "name": "Foolish Minds",
-    "year": "2024",
-    "role": "Design & front-end",
-    "stack": ["React", "Motion", "Vite", "CSS"],
-    "summary": "A band site: dates, releases and press material in one page.",
-    "content": "A one-page site for a band: releases, upcoming dates and press assets, with scroll-driven reveals and a dark, high-contrast layout.",
-    "link": "",
-    "live": false,
-    "images": ["assets/projects/foolish-1.png", "assets/projects/foolish-2.png", "assets/projects/foolish-3.png", "assets/projects/foolish-4.png"]
-  }
+	{
+		"id": "awaypiano",
+		"name": "Away Piano",
+		"year": "2026",
+		"role": "Design & front-end",
+		"stack": ["Next.js", "React", "CSS"],
+		"categories": ["Web app", "Music"],
+		"summary": "Play piano with your friends in real-time.",
+		"content": "Away is a piano you play in the browser, with other people. It opens on three ways in: solo, multiplayer for playing alongside someone in real time, and a practice mode for working a piece up to speed, with a profile and settings for anyone who comes back. No instrument and no reading music required — the whole point is to drop the barrier low enough that someone with no training will actually sit down and play. Built on the Next.js App Router.",
+		"link": "https://www.awaypiano.com/",
+		"live": true,
+		"images": ["assets/projects/away-1.png", "assets/projects/away-2.png", "assets/projects/away-3.png", "assets/projects/away-4.png"]
+	},
+	{
+		"id": "topart-home",
+		"name": "Topart Home",
+		"year": "2026",
+		"role": "Design & front-end, client project",
+		"stack": ["Next.js", "React", "Tailwind CSS"],
+		"categories": ["Showcase site", "Client work"],
+		"summary": "A site for a Brussels carpenter who builds furniture, kitchens and upholstery to measure.",
+		"content": "Topart Home is the shopfront for Julien, an artisan menuisier working out of Rue Heyvaert in Brussels. The site walks through the three sides of the workshop — kitchens, upholstery and custom furniture — alongside the craft behind them: local Belgian oak, walnut and beech, 3D design previews before anything is cut, and client reviews from finished jobs. Built on the Next.js App Router with Tailwind, with localised routes and full Open Graph metadata so the business surfaces properly in search and when shared.",
+		"link": "https://www.toparthome.be/fr",
+		"live": true,
+		"images": ["assets/projects/topart-1.png", "assets/projects/topart-2.png", "assets/projects/topart-3.png", "assets/projects/topart-4.png"]
+	},
+	{
+		"id": "matteo-gm",
+		"name": "Matteo.gm",
+		"year": "2026",
+		"role": "Design & front-end",
+		"stack": ["React", "Vite", "GSAP", "EmailJS"],
+		"categories": ["Showcase site", "Music"],
+		"summary": "A booking site for my piano work: house concerts, venues and film commissions.",
+		"content": "The site for my work as a pianist and composer — small, warm pieces for piano. One page that opens on the 2026–27 booking call, then moves through the music, the story behind it and a contact form wired to EmailJS. GSAP drives the scroll transitions and the marquee, and the artwork is the pastel drawing for \"Away\".",
+		"link": "https://matteo-gm.vercel.app/",
+		"live": true,
+		"images": ["assets/projects/matteo-1.png", "assets/projects/matteo-2.png", "assets/projects/matteo-3.png", "assets/projects/matteo-4.png"]
+	},{
+		"id": "stick-underground",
+		"name": "Stick Underground",
+		"year": "2023",
+		"role": "Design & front-end",
+		"stack": ["JavaScript", "HTML", "CSS", "MongoDB"],
+		"categories": ["Web app", "School project"],
+		"summary": "A finder that matches drummers with the sticks that suit how they actually play.",
+		"content": "Stick Underground is a website for drummers of all levels, built to help them find drumsticks adapted to their needs. Product data lives in MongoDB and is filtered client-side, so browsing the catalogue never reloads the page.",
+		"link": "https://ehb-mct.github.io/web2-course-project-front-end-MatteoGiambarresi/index.html",
+		"live": true,
+		"images": ["assets/projects/stick-1.png", "assets/projects/stick-2.png", "assets/projects/stick-3.png", "assets/projects/stick-4.png"]
+	},
+	{
+		"id": "make-it-brussels",
+		"name": "Make it Brussels",
+		"year": "2024",
+		"role": "Front-end, team of four",
+		"stack": ["JavaScript", "HTML", "CSS", "PocketHost"],
+		"categories": ["Web app", "Client work", "School project"],
+		"summary": "A lending platform for the Erasmushogeschool medialab, built with a real client brief.",
+		"content": "Make it Brussels was a client project with EHB: a website for the uitleendienst of the medialab at Erasmus Kaai. Students browse available gear, check what is out on loan and reserve it. The whole flow sits on a PocketHost backend.",
+		"link": "https://ehb-mct.github.io/full-projects-2-2023-2024-lab1-mct",
+		"live": true,
+		"images": [
+			"https://res.cloudinary.com/dtpbxvstn/image/upload/v1757872758/makeitbrussels_image_1_hucdhk.png",
+			"https://res.cloudinary.com/dtpbxvstn/image/upload/v1757872759/makeitbrussels_image_2_cfgoed.png",
+			"https://res.cloudinary.com/dtpbxvstn/image/upload/v1757872759/makeitbrussels_image_3_b0dqem.png",
+			"https://res.cloudinary.com/dtpbxvstn/image/upload/v1757872758/makeitbrussels_image_4_lmzrf7.png"
+		]
+	},
+	{
+		"id": "pokedex",
+		"name": "Pokédex",
+		"year": "2025",
+		"role": "Solo build",
+		"stack": ["React", "JavaScript", "REST API", "CSS"],
+		"categories": ["Web app"],
+		"summary": "A searchable Pokédex built on the public PokéAPI.",
+		"content": "A React front-end on top of the public PokéAPI: search, type filters and a detail view per Pokémon, with results cached so repeat lookups are instant.",
+		"link": "",
+		"live": false,
+		"images": ["assets/projects/pokemon-1.png", "assets/projects/pokemon-2.png", "assets/projects/pokemon-3.png", "assets/projects/pokemon-4.png"]
+	},
+	{
+		"id": "matteo-music",
+		"name": "Matteo Music",
+		"year": "2025",
+		"role": "Design & front-end",
+		"stack": ["React", "GSAP", "Web Audio API", "CSS"],
+		"categories": ["Showcase site", "Music"],
+		"summary": "A music page where the layout reacts to what is playing.",
+		"content": "A personal music page: tracks, an in-page player and GSAP transitions driven by playback state. Built to see how far interface motion can go before it gets in the way.",
+		"link": "",
+		"live": false,
+		"images": ["assets/projects/music-1.png", "assets/projects/music-2.png", "assets/projects/music-3.png", "assets/projects/music-4.png"]
+	},
+	{
+		"id": "foolish-minds",
+		"name": "Foolish Minds",
+		"year": "2024",
+		"role": "Design & front-end",
+		"stack": ["React", "Motion", "Vite", "CSS"],
+		"categories": ["Showcase site", "Music"],
+		"summary": "A band site: dates, releases and press material in one page.",
+		"content": "A one-page site for a band: releases, upcoming dates and press assets, with scroll-driven reveals and a dark, high-contrast layout.",
+		"link": "",
+		"live": false,
+		"images": ["assets/projects/foolish-1.png", "assets/projects/foolish-2.png", "assets/projects/foolish-3.png", "assets/projects/foolish-4.png"]
+	}
 ]

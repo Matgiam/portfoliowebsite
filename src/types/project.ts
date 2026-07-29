@@ -4,6 +4,7 @@ export interface Project {
   year: string;
   role: string;
   stack: string[];
+  categories: string[];
   summary: string;
   content: string;
   link: string;
