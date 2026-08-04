@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger, ScrollSmoother } from 'gsap/all';
 import type { DecoratedProject } from '../../types/project';
@@ -13,6 +13,65 @@ interface Props {
 export default function FeaturedProjects({ projects, onOpen }: Props) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const stripRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+
+  // Mobile only: the strip is a native snap carousel, so track which card is centred.
+  useEffect(() => {
+    const strip = stripRef.current;
+    if (!strip) return;
+
+    const onScroll = () => {
+      const centre = strip.scrollLeft + strip.clientWidth / 2;
+      let closest = 0;
+      let smallest = Infinity;
+      Array.from(strip.children).forEach((child, i) => {
+        const card = child as HTMLElement;
+        const distance = Math.abs(card.offsetLeft + card.offsetWidth / 2 - centre);
+        if (distance < smallest) {
+          smallest = distance;
+          closest = i;
+        }
+      });
+      setActive(closest);
+    };
+
+    strip.addEventListener('scroll', onScroll, { passive: true });
+    return () => strip.removeEventListener('scroll', onScroll);
+  }, [projects.length]);
+
+  // Native smooth scrollTo gets cancelled by `scroll-snap-type: mandatory`, so drive
+  // scrollLeft frame by frame instead and let the snap settle on the exact target.
+  const goTo = (i: number) => {
+    const strip = stripRef.current;
+    const card = strip?.children[i] as HTMLElement | undefined;
+    if (!strip || !card) return;
+
+    const to = card.offsetLeft - (strip.clientWidth - card.offsetWidth) / 2;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      strip.scrollLeft = to;
+      return;
+    }
+
+    // Mandatory snapping yanks every intermediate frame back to the nearest snap
+    // point, so suspend it while the tween runs and let it re-engage on the target.
+    const restore = () => {
+      strip.style.scrollSnapType = '';
+    };
+    strip.style.scrollSnapType = 'none';
+
+    const proxy = { x: strip.scrollLeft };
+    gsap.to(proxy, {
+      x: to,
+      duration: 0.5,
+      ease: 'power2.out',
+      overwrite: true,
+      onUpdate: () => {
+        strip.scrollLeft = proxy.x;
+      },
+      onComplete: restore,
+      onInterrupt: restore,
+    });
+  };
 
   useEffect(() => {
     const wrap = wrapRef.current;
@@ -128,28 +187,101 @@ export default function FeaturedProjects({ projects, onOpen }: Props) {
         ))}
       </div>
 
+      <div className="featured-pager">
+        <span className="featured-count" aria-hidden="true">
+          {String(active + 1).padStart(2, '0')}
+          <i>/</i>
+          {String(projects.length).padStart(2, '0')}
+        </span>
+        <span className="featured-dots">
+          {projects.map((p, i) => (
+            <button
+              key={`dot-${p.id}-${i}`}
+              type="button"
+              className={i === active ? 'is-active' : undefined}
+              onClick={() => goTo(i)}
+              aria-label={`Show ${p.name}`}
+              aria-current={i === active}
+            />
+          ))}
+        </span>
+      </div>
+
       <style>{`
+        .featured-pager { display: none; }
+
         @media (max-width: 759px) {
+          #work-strip {
+            min-height: auto !important;
+            padding: calc(var(--space-8) * 2.4) 0;
+            overflow: visible !important;
+          }
+          /* One card centred per screen, neighbours peeking in: 78 + 2*11 = 100vw. */
           .featured-strip {
             width: 100% !important;
-            flex-direction: column;
-            align-items: stretch;
-            gap: clamp(16px, 4vw, 26px) !important;
-            padding: 0 clamp(16px, 5vw, 40px) !important;
+            gap: 4vw !important;
+            padding: 4px 11vw !important;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            overscroll-behavior-x: contain;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
             will-change: auto !important;
             transform: none !important;
           }
+          .featured-strip::-webkit-scrollbar { display: none; }
           .featured-card {
-            width: 100% !important;
+            width: 78vw !important;
+            scroll-snap-align: center;
           }
-          .featured-card:not(:first-child) {
-            display: none !important;
+          .featured-pager {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-6);
+            padding: var(--space-6) clamp(16px, 5vw, 40px) 0;
           }
-          #work-strip {
-            min-height: auto !important;
-            padding: calc(var(--space-8) * 3) 0;
-            overflow: visible !important;
+          .featured-count {
+            font-family: var(--font-heading);
+            font-size: 11px;
+            letter-spacing: 0.14em;
+            color: color-mix(in srgb, var(--color-text) 58%, transparent);
           }
+          .featured-count i {
+            font-style: normal;
+            margin: 0 4px;
+            opacity: 0.5;
+          }
+          .featured-dots {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+          }
+          .featured-dots button {
+            position: relative;
+            width: 6px;
+            height: 6px;
+            padding: 0;
+            border: 0;
+            border-radius: 99px;
+            background: color-mix(in srgb, var(--color-text) 24%, transparent);
+            transition: width 0.3s ease, background 0.3s ease;
+          }
+          /* Keep the dot 6px but give it a 44px-tall touch target. */
+          .featured-dots button::after {
+            content: '';
+            position: absolute;
+            inset: -19px -3px;
+          }
+          .featured-dots button.is-active {
+            width: 20px;
+            background: var(--color-accent);
+          }
+        }
+
+        @media (max-width: 759px) and (prefers-reduced-motion: reduce) {
+          .featured-dots button { transition: none; }
         }
       `}</style>
     </section>

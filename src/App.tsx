@@ -35,7 +35,10 @@ export default function App() {
         content: '#smooth-content',
         smooth: 1.2,
         effects: true,
-        normalizeScroll: true,
+        // allowNestedScroll lets a touch drag inside a scrollable child (the mobile
+        // work carousel) run natively instead of being swallowed by the normalizer.
+        // debounce mirrors what ScrollSmoother passes when normalizeScroll is `true`.
+        normalizeScroll: { debounce: true, allowNestedScroll: true },
         ignoreMobileResize: true,
       });
     });
